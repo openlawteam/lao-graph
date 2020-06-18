@@ -30,4 +30,4 @@ yarn rinkeby-local && yarn deploy
 yarn rinkeby-dev && yarn deploy
 ```
 
-See (https://thegraph.com/docs/deploy-a-subgraph#redeploying-a-subgraph)[here] for more information
+See [here](https://thegraph.com/docs/deploy-a-subgraph#redeploying-a-subgraph) for more information
