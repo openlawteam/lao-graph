@@ -1,12 +1,12 @@
 specVersion: 0.0.2
 schema:
-  file: schema.graphql
+  file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: Contract
-    network: rinkeby
+    network: "{{network}}"
     source:
-      address: "0xAc665BE1E44cC4EeC388E34C3899C271FeE847F4"
+      address: "{{address}}"
       abi: Contract
     mapping:
       kind: ethereum/events
@@ -28,14 +28,11 @@ dataSources:
         - OwnershipTransferred
       abis:
         - name: Contract
-          file: Contract/abis/Contract.json
+          file: ./abis/Contract.json
       eventHandlers:
-        - event: SummonComplete(indexed
-            address,address[],uint256,uint256,uint256,uint256,uint256,uint256,uint256)
+        - event: SummonComplete(indexed address,address[],uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSummonComplete
-        - event: SubmitProposal(indexed
-            address,uint256,uint256,uint256,address,uint256,address,string,bool[6],uint256,indexed
-            address,indexed address)
+        - event: SubmitProposal(indexed address,uint256,uint256,uint256,address,uint256,address,string,bool[6],uint256,indexed address,indexed address)
           handler: handleSubmitProposal
         - event: SponsorProposal(indexed address,indexed address,uint256,uint256,uint256)
           handler: handleSponsorProposal
@@ -59,4 +56,4 @@ dataSources:
           handler: handleWithdraw
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
-      file: Contract/Contract.wasm
+      file: ./src/mapping.ts
