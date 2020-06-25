@@ -17,17 +17,19 @@ For example, `/config/rinkeby-local.json`:
 }
 ```
 
-A template manifest `subgraph.template.yaml` has been created, which uses the mustache templating system with variable placeholders {{network}} and {{address}}. To deploy the subgraph for mainnet or Rinkeby (local/dev) simply run one of the following commands:
+A template manifest `subgraph.template.yaml` has been created, which uses the mustache templating system with variable placeholders `{{network}}` and `{{address}}`. To deploy the subgraph for mainnet or Rinkeby (local/dev) simply run one of the following commands:
 
 ```
 # Mainnet:
 yarn prepare:mainnet && yarn deploy
 
 # Rinkeby (localhost):
-yarn rinkeby-local && yarn deploy
+yarn prepare:local && yarn deploy
 
 # Rinkeby (develop):
-yarn rinkeby-dev && yarn deploy
+yarn prepare:rinkeby && yarn deploy
 ```
+
+Any changes to `mapping.ts`, `schema.ts` or `schema.graphql` will require a rebuild, use `yarn build`. Then prepare and deploy using one of the above yarn commands.
 
 See [here](https://thegraph.com/docs/deploy-a-subgraph#redeploying-a-subgraph) for more information
