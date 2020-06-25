@@ -8,7 +8,7 @@
 
 Managing different network deployments for the contracts, is currently setup using config files in `/config/`, providing the addresses for each network:
 
-For example, `/config/rinkeby-local.json`:
+For example, `/config/local.json`:
 
 ```
 {
