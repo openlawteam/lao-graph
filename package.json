@@ -8,9 +8,9 @@
     "create-local": "graph create --node http://localhost:8020/ sophiacodes/the-lao",
     "remove-local": "graph remove --node http://localhost:8020/ sophiacodes/the-lao",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 sophiacodes/the-lao",
+    "prepare:local": "mustache config/local.json subgraph.template.yaml > subgraph.yaml",
     "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
-    "prepare:rinkeby-local": "mustache config/rinkeby-local.json subgraph.template.yaml > subgraph.yaml",
-    "prepare:rinkeby-dev": "mustache config/rinkeby-dev.json subgraph.template.yaml > subgraph.yaml"
+    "prepare:rinkeby": "mustache config/rinkeby.json subgraph.template.yaml > subgraph.yaml"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.18.0",

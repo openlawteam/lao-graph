@@ -129,6 +129,7 @@ type Proposal @entity {
   paymentRequested: BigInt!
   paymentToken: Bytes!
   startingPeriod: BigInt!
+  endingPeriod: BigInt!
   yesVotes: BigInt!
   noVotes: BigInt!
 

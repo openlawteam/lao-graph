@@ -9,7 +9,7 @@ import {
   Address,
   Bytes,
   BigInt,
-  BigDecimal
+  BigDecimal,
 } from "@graphprotocol/graph-ts";
 
 export class Dao extends Entity {
@@ -1213,6 +1213,15 @@ export class Proposal extends Entity {
 
   set startingPeriod(value: BigInt) {
     this.set("startingPeriod", Value.fromBigInt(value));
+  }
+
+  get endingPeriod(): BigInt {
+    let value = this.get("endingPeriod");
+    return value.toBigInt();
+  }
+
+  set endingPeriod(value: BigInt) {
+    this.set("endingPeriod", Value.fromBigInt(value));
   }
 
   get yesVotes(): BigInt {

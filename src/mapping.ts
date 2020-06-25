@@ -167,9 +167,7 @@ export function createAndApproveToken(molochId: string, token: Bytes): string {
 
 // DONE - event SummonComplete(address indexed summoner, address[] tokens, uint256 summoningTime, uint256 periodDuration, uint256 votingPeriodLength, uint256 gracePeriodLength, uint256 proposalDeposit, uint256 dilutionBound, uint256 processingReward);
 
-export function handleOwnershipTransferred(event: OwnershipTransferred): void {
-  
-}
+export function handleOwnershipTransferred(event: OwnershipTransferred): void {}
 
 // handler: handleSummonComplete
 export function handleSummonComplete(event: SummonComplete): void {
@@ -316,6 +314,7 @@ export function handleSubmitProposal(event: SubmitProposal): void {
   proposal.paymentRequested = event.params.paymentRequested;
   proposal.paymentToken = event.params.paymentToken;
   proposal.startingPeriod = BigInt.fromI32(0);
+  proposal.endingPeriod = BigInt.fromI32(0);
   proposal.yesVotes = BigInt.fromI32(0);
   proposal.noVotes = BigInt.fromI32(0);
   proposal.sponsored = flags[0];
@@ -453,6 +452,9 @@ export function handleSponsorProposal(event: SponsorProposal): void {
   proposal.proposalIndex = event.params.proposalIndex;
   proposal.sponsor = event.params.memberAddress;
   proposal.startingPeriod = event.params.startingPeriod;
+  proposal.endingPeriod = event.params.startingPeriod.plus(
+    moloch.votingPeriodLength.times(moloch.periodDuration)
+  );
   proposal.sponsored = true;
 
   proposal.save();
