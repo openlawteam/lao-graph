@@ -4,9 +4,9 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Contract
-    network: rinkeby
+    network: kovan
     source:
-      address: "0xAc665BE1E44cC4EeC388E34C3899C271FeE847F4"
+      address: "0x32E2a585d03C22C97628fF26026a0B4C5dE56190"
       abi: Contract
     mapping:
       kind: ethereum/events
