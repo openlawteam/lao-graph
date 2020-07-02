@@ -212,7 +212,7 @@ export function handleSummonComplete(event: SummonComplete): void {
 
   moloch.save();
 
-  //Create member foir summoner
+  //Create member for summoner
   let memberId = molochId
     .concat("-member-")
     .concat(event.params.summoner.toHex());
@@ -453,7 +453,7 @@ export function handleSponsorProposal(event: SponsorProposal): void {
   proposal.sponsor = event.params.memberAddress;
   proposal.startingPeriod = event.params.startingPeriod;
   proposal.endingPeriod = event.params.startingPeriod.plus(
-    moloch.votingPeriodLength.times(moloch.periodDuration)
+    moloch.votingPeriodLength //.times(moloch.periodDuration)
   );
   proposal.sponsored = true;
 
