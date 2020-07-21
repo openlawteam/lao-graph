@@ -1098,6 +1098,24 @@ export class Proposal extends Entity {
     this.set("createdAt", Value.fromString(value));
   }
 
+  get sponsoredAt(): string {
+    let value = this.get("sponsoredAt");
+    return value.toString();
+  }
+
+  set sponsoredAt(value: string) {
+    this.set("sponsoredAt", Value.fromString(value));
+  }
+
+  get processedAt(): string {
+    let value = this.get("processedAt");
+    return value.toString();
+  }
+
+  set processedAt(value: string) {
+    this.set("processedAt", Value.fromString(value));
+  }
+
   get member(): string {
     let value = this.get("member");
     return value.toString();

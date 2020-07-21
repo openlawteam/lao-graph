@@ -455,6 +455,7 @@ export function handleSponsorProposal(event: SponsorProposal): void {
   proposal.endingPeriod = event.params.startingPeriod.plus(
     moloch.votingPeriodLength //.times(moloch.periodDuration)
   );
+  proposal.sponsoredAt = event.block.timestamp.toString();
   proposal.sponsored = true;
 
   proposal.save();
@@ -609,6 +610,7 @@ export function handleProcessProposal(event: ProcessProposal): void {
     });
   }
   proposal.processed = true;
+  proposal.processedAt = event.block.timestamp.toString();
 
   // NOTE: issue processing reward and return deposit
   // TODO: Can this create a member (exists=false) if needed?
