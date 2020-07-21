@@ -115,6 +115,8 @@ type Proposal @entity {
   molochAddress: Bytes!
   timestamp: String!
   createdAt: String!
+  sponsoredAt: String!
+  processedAt: String!
   member: Member!
   memberAddress: Bytes!
   delegateKey: Bytes!
