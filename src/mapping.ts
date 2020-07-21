@@ -301,6 +301,8 @@ export function handleSubmitProposal(event: SubmitProposal): void {
   proposal.molochAddress = event.address;
   proposal.timestamp = event.block.timestamp.toString();
   proposal.createdAt = event.block.timestamp.toString();
+  proposal.sponsoredAt = "";
+  proposal.processedAt = "";
   proposal.member = memberId;
   proposal.memberAddress = event.params.memberAddress;
   proposal.delegateKey = event.params.delegateKey;
