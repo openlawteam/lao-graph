@@ -21,13 +21,13 @@ A template manifest `subgraph.template.yaml` has been created, which uses the mu
 
 ```
 # Mainnet:
-yarn prepare:mainnet && yarn deploy
+yarn prepare:mainnet && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao
 
 # Rinkeby (localhost):
-yarn prepare:local && yarn deploy
+yarn prepare:local && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-localhost
 
 # Rinkeby (develop):
-yarn prepare:rinkeby && yarn deploy
+yarn prepare:rinkeby && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-rinkeby
 ```
 
 Any changes to `mapping.ts`, `schema.ts` or `schema.graphql` will require a rebuild, use `yarn build`. Then prepare and deploy using one of the above yarn commands.
