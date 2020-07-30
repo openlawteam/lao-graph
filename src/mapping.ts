@@ -167,9 +167,7 @@ export function createAndApproveToken(molochId: string, token: Bytes): string {
 
 // DONE - event SummonComplete(address indexed summoner, address[] tokens, uint256 summoningTime, uint256 periodDuration, uint256 votingPeriodLength, uint256 gracePeriodLength, uint256 proposalDeposit, uint256 dilutionBound, uint256 processingReward);
 
-export function handleOwnershipTransferred(event: OwnershipTransferred): void {
-  
-}
+export function handleOwnershipTransferred(event: OwnershipTransferred): void {}
 
 // handler: handleSummonComplete
 export function handleSummonComplete(event: SummonComplete): void {
@@ -214,7 +212,7 @@ export function handleSummonComplete(event: SummonComplete): void {
 
   moloch.save();
 
-  //Create member foir summoner
+  //Create member for summoner
   let memberId = molochId
     .concat("-member-")
     .concat(event.params.summoner.toHex());
@@ -303,6 +301,8 @@ export function handleSubmitProposal(event: SubmitProposal): void {
   proposal.molochAddress = event.address;
   proposal.timestamp = event.block.timestamp.toString();
   proposal.createdAt = event.block.timestamp.toString();
+  proposal.sponsoredAt = "";
+  proposal.processedAt = "";
   proposal.member = memberId;
   proposal.memberAddress = event.params.memberAddress;
   proposal.delegateKey = event.params.delegateKey;
@@ -316,6 +316,7 @@ export function handleSubmitProposal(event: SubmitProposal): void {
   proposal.paymentRequested = event.params.paymentRequested;
   proposal.paymentToken = event.params.paymentToken;
   proposal.startingPeriod = BigInt.fromI32(0);
+  proposal.endingPeriod = BigInt.fromI32(0);
   proposal.yesVotes = BigInt.fromI32(0);
   proposal.noVotes = BigInt.fromI32(0);
   proposal.sponsored = flags[0];
@@ -453,6 +454,10 @@ export function handleSponsorProposal(event: SponsorProposal): void {
   proposal.proposalIndex = event.params.proposalIndex;
   proposal.sponsor = event.params.memberAddress;
   proposal.startingPeriod = event.params.startingPeriod;
+  proposal.endingPeriod = event.params.startingPeriod.plus(
+    moloch.votingPeriodLength //.times(moloch.periodDuration)
+  );
+  proposal.sponsoredAt = event.block.timestamp.toString();
   proposal.sponsored = true;
 
   proposal.save();
@@ -607,6 +612,7 @@ export function handleProcessProposal(event: ProcessProposal): void {
     });
   }
   proposal.processed = true;
+  proposal.processedAt = event.block.timestamp.toString();
 
   // NOTE: issue processing reward and return deposit
   // TODO: Can this create a member (exists=false) if needed?

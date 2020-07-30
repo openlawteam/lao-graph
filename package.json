@@ -4,13 +4,18 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ adridadou/thelao",
-    "create-local": "graph create --node http://localhost:8020/ adridadou/thelao",
-    "remove-local": "graph remove --node http://localhost:8020/ adridadou/thelao",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 adridadou/thelao"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-localhost",
+    "create-local": "graph create --node http://localhost:8020/ sophiacodes/the-lao-localhost",
+    "remove-local": "graph remove --node http://localhost:8020/ sophiacodes/the-lao-localhost",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 sophiacodes/the-lao-localhost",
+    "prepare:local": "mustache config/local.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:rinkeby": "mustache config/rinkeby.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:kovan": "mustache config/kovan.json subgraph.template.yaml > subgraph.yaml"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.18.0",
-    "@graphprotocol/graph-ts": "0.18.0"
+    "@graphprotocol/graph-ts": "0.18.0",
+    "mustache": "^4.0.1"
   }
 }

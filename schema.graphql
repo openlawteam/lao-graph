@@ -1,3 +1,11 @@
+type _Schema_
+  @fulltext(
+    name: "proposalSearch"
+    language: en
+    algorithm: rank
+    include: [{ entity: "Proposal", fields: [{ name: "details" }] }]
+  )
+
 type Dao @entity {
   id: ID!
   index: String
@@ -115,6 +123,8 @@ type Proposal @entity {
   molochAddress: Bytes!
   timestamp: String!
   createdAt: String!
+  sponsoredAt: String!
+  processedAt: String!
   member: Member!
   memberAddress: Bytes!
   delegateKey: Bytes!
@@ -129,6 +139,7 @@ type Proposal @entity {
   paymentRequested: BigInt!
   paymentToken: Bytes!
   startingPeriod: BigInt!
+  endingPeriod: BigInt!
   yesVotes: BigInt!
   noVotes: BigInt!
 
