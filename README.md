@@ -21,15 +21,20 @@ A template manifest `subgraph.template.yaml` has been created, which uses the mu
 
 ```
 # Mainnet:
-yarn prepare:mainnet && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao
+yarn prepare:mainnet && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ <SUBGRAPH_ACCOUNT>/<SUBGRAPH_NAME>
 
 # Rinkeby (localhost):
-yarn prepare:local && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-localhost
+yarn prepare:local && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ <SUBGRAPH_ACCOUNT>/<SUBGRAPH_NAME>
 
 # Rinkeby (develop):
-yarn prepare:rinkeby && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-rinkeby
+yarn prepare:rinkeby && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ <SUBGRAPH_ACCOUNT>/<SUBGRAPH_NAME>
 ```
+Example subgraph account and name: `sophiacodes/the-lao-localhost`
 
 Any changes to `mapping.ts`, `schema.ts` or `schema.graphql` will require a rebuild, use `yarn build`. Then prepare and deploy using one of the above yarn commands.
 
 See [here](https://thegraph.com/docs/deploy-a-subgraph#redeploying-a-subgraph) for more information
+
+### Updating The LAO database with a changed subgraph URI
+
+If a new subgraph has been deployed under a different account for either testnet or mainnet, the new subgraph URI will need to be updated in the `org` table in the LAO database. There are two columns, one for testnet `graphURLTestnet` and the other for mainnet `graphURLMainnet`.
