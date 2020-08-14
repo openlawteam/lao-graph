@@ -19,8 +19,10 @@ import {
   Address,
   ByteArray,
   Bytes,
+  ethereum,
 } from "@graphprotocol/graph-ts";
 import {
+  Block,
   Moloch,
   Member,
   Token,
@@ -930,4 +932,13 @@ export function handleTokensCollected(event: TokensCollected): void {
   ]);
 
   addToBalance(molochId, GUILD, tokenId, event.params.amountToCollect);
+}
+
+export function handleBlockWithCallToContract(block: ethereum.Block): void {
+  let id = block.hash.toHex();
+
+  let entity = new Block(id);
+  entity.timestamp = block.timestamp.toString();
+
+  entity.save();
 }

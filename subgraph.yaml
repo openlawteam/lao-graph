@@ -56,4 +56,8 @@ dataSources:
           handler: handleWithdraw
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
+      blockHandlers:
+        - handler: handleBlockWithCall
+          filter:
+            kind: call
       file: ./src/mapping.ts

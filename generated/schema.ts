@@ -9,7 +9,7 @@ import {
   Address,
   Bytes,
   BigInt,
-  BigDecimal,
+  BigDecimal
 } from "@graphprotocol/graph-ts";
 
 export class Dao extends Entity {
@@ -1391,5 +1391,45 @@ export class Proposal extends Entity {
 
   set noShares(value: BigInt) {
     this.set("noShares", Value.fromBigInt(value));
+  }
+}
+
+export class Block extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Block entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Block entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Block", id.toString(), this);
+  }
+
+  static load(id: string): Block | null {
+    return store.get("Block", id) as Block | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get timestamp(): string {
+    let value = this.get("timestamp");
+    return value.toString();
+  }
+
+  set timestamp(value: string) {
+    this.set("timestamp", Value.fromString(value));
   }
 }
