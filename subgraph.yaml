@@ -57,7 +57,7 @@ dataSources:
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
       blockHandlers:
-        - handler: handleBlockWithCall
+        - handler: handleBlockWithCallToContract
           filter:
             kind: call
       file: ./src/mapping.ts
