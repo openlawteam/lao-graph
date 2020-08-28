@@ -31,8 +31,8 @@ import {
 } from "../generated/schema";
 
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
-let ESCROW = Address.fromString("0x000000000000000000000000000000000000dead");
-let GUILD = Address.fromString("0x000000000000000000000000000000000000beef");
+let ESCROW = Address.fromString("0x000000000000000000000000000000000000beef");
+let GUILD = Address.fromString("0x000000000000000000000000000000000000dead");
 
 function loadOrCreateTokenBalance(
   molochId: string,
