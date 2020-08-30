@@ -907,7 +907,7 @@ export function handleWithdraw(event: Withdraw): void {
 
   let tokenId = molochId.concat("-token-").concat(event.params.token.toHex());
 
-  if (event.params.amount > BigInt.fromI32(0)) {
+  if (event.params.amount.gt(BigInt.fromI32(0))) {
     subtractFromBalance(
       molochId,
       event.transaction.from,
