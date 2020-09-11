@@ -8,6 +8,7 @@ dataSources:
     source:
       address: "0x8f56682a50becb1df2fb8136954f2062871bc7fc"
       abi: Contract
+      startBlock: 9955236
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -52,6 +53,8 @@ dataSources:
           handler: handleCancelProposal
         - event: UpdateDelegateKey(indexed address,address)
           handler: handleUpdateDelegateKey
+        - event: Withdraw(indexed address,address,uint256)
+          handler: handleWithdraw
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
       file: ./src/mapping.ts

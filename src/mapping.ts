@@ -17,7 +17,6 @@ import {
   BigInt,
   log,
   Address,
-  ByteArray,
   Bytes,
 } from "@graphprotocol/graph-ts";
 import {
@@ -56,6 +55,7 @@ function addToBalance(
   amount: BigInt
 ): string {
   let tokenBalanceId = token.concat("-member-").concat(member.toHex());
+  log.info("********** add (or create) to balance " + member.toHex() , []);
   let balance: TokenBalance | null = loadOrCreateTokenBalance(
     molochId,
     member,
@@ -66,14 +66,18 @@ function addToBalance(
   return tokenBalanceId;
 }
 function subtractFromBalance(
-  molochId: string,
   member: Bytes,
   token: string,
   amount: BigInt
 ): string {
-  let tokenBalanceId = token.concat("-member-").concat(member.toHex());
-  let balance: TokenBalance | null = TokenBalance.load(tokenBalanceId);
 
+  let tokenBalanceId = token.concat("-member-").concat(member.toHex());
+  log.info("********** substract from balance " + member.toHex(), []);
+  let balanceUnsafe: TokenBalance | null = TokenBalance.load(tokenBalanceId);
+  if(balanceUnsafe == null) {
+    log.info("********** error while substracting balance from missing balance " + member.toHex(), []);
+  }
+  let balance = balanceUnsafe == null ? new TokenBalance(tokenBalanceId) : balanceUnsafe;
   balance.tokenBalance = balance.tokenBalance.minus(amount);
 
   balance.save();
@@ -87,7 +91,7 @@ function internalTransfer(
   token: string,
   amount: BigInt
 ): void {
-  subtractFromBalance(molochId, from, token, amount);
+  subtractFromBalance(from, token, amount);
   addToBalance(molochId, to, token, amount);
 }
 
@@ -486,7 +490,9 @@ export function handleProcessProposal(event: ProcessProposal): void {
     .concat("-token-")
     .concat(proposal.paymentToken.toHex());
 
-  let isNewMember = member != null && member.exists == true ? false : true;
+    log.info('********** processing proposal for applicant ' + proposal.applicant.toHex(),[]);
+
+  let isNewMember = member == null || !member.exists;
 
   //NOTE: PROPOSAL PASSED
   if (event.params.didPass) {
@@ -909,8 +915,7 @@ export function handleWithdraw(event: Withdraw): void {
 
   if (event.params.amount.gt(BigInt.fromI32(0))) {
     subtractFromBalance(
-      molochId,
-      event.transaction.from,
+      event.params.memberAddress,
       tokenId,
       event.params.amount
     );
