@@ -24,7 +24,6 @@ dataSources:
         - TokensCollected
         - CancelProposal
         - UpdateDelegateKey
-        - Withdraw
         - OwnershipTransferred
       abis:
         - name: Contract
@@ -52,8 +51,6 @@ dataSources:
           handler: handleCancelProposal
         - event: UpdateDelegateKey(indexed address,address)
           handler: handleUpdateDelegateKey
-        - event: Withdraw(indexed address,address,uint256)
-          handler: handleWithdraw
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
       file: ./src/mapping.ts
