@@ -13,12 +13,7 @@ import {
   TokensCollected,
   OwnershipTransferred,
 } from "../generated/Contract/Contract";
-import {
-  BigInt,
-  log,
-  Address,
-  Bytes,
-} from "@graphprotocol/graph-ts";
+import { BigInt, log, Address, Bytes } from "@graphprotocol/graph-ts";
 import {
   Moloch,
   Member,
@@ -55,7 +50,7 @@ function addToBalance(
   amount: BigInt
 ): string {
   let tokenBalanceId = token.concat("-member-").concat(member.toHex());
-  log.info("********** add (or create) to balance " + member.toHex() , []);
+  log.info("********** add (or create) to balance " + member.toHex(), []);
   let balance: TokenBalance | null = loadOrCreateTokenBalance(
     molochId,
     member,
@@ -70,14 +65,18 @@ function subtractFromBalance(
   token: string,
   amount: BigInt
 ): string {
-
   let tokenBalanceId = token.concat("-member-").concat(member.toHex());
   log.info("********** substract from balance " + member.toHex(), []);
   let balanceUnsafe: TokenBalance | null = TokenBalance.load(tokenBalanceId);
-  if(balanceUnsafe == null) {
-    log.info("********** error while substracting balance from missing balance " + member.toHex(), []);
+  if (balanceUnsafe == null) {
+    log.info(
+      "********** error while substracting balance from missing balance " +
+        member.toHex(),
+      []
+    );
   }
-  let balance = balanceUnsafe == null ? new TokenBalance(tokenBalanceId) : balanceUnsafe;
+  let balance =
+    balanceUnsafe == null ? new TokenBalance(tokenBalanceId) : balanceUnsafe;
   balance.tokenBalance = balance.tokenBalance.minus(amount);
 
   balance.save();
@@ -490,7 +489,11 @@ export function handleProcessProposal(event: ProcessProposal): void {
     .concat("-token-")
     .concat(proposal.paymentToken.toHex());
 
-    log.info('********** processing proposal for applicant ' + proposal.applicant.toHex(),[]);
+  log.info(
+    "********** processing proposal for applicant " +
+      proposal.applicant.toHex(),
+    []
+  );
 
   let isNewMember = member == null || !member.exists;
 
@@ -909,19 +912,19 @@ export function handleUpdateDelegateKey(event: UpdateDelegateKey): void {
 // handler: handleWithdraw
 // NOTE: Used event.transaction.from instead of event.params.memberAddress
 // due to event on MCV where those didn't match and caused subtractFromBalance to fail
-export function handleWithdraw(event: Withdraw): void {
-  let molochId = event.address.toHexString();
+// export function handleWithdraw(event: Withdraw): void {
+//   let molochId = event.address.toHexString();
 
-  let tokenId = molochId.concat("-token-").concat(event.params.token.toHex());
+//   let tokenId = molochId.concat("-token-").concat(event.params.token.toHex());
 
-  if (event.params.amount.gt(BigInt.fromI32(0))) {
-    subtractFromBalance(
-      event.params.memberAddress,
-      tokenId,
-      event.params.amount
-    );
-  }
-}
+//   if (event.params.amount.gt(BigInt.fromI32(0))) {
+//     subtractFromBalance(
+//       event.params.memberAddress,
+//       tokenId,
+//       event.params.amount
+//     );
+//   }
+// }
 
 // event TokensCollected(address indexed token, uint256 amountToCollect);
 // handler: handleTokensCollected
