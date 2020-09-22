@@ -619,6 +619,7 @@ export function handleProcessProposal(event: ProcessProposal): void {
   }
   proposal.processed = true;
   proposal.processedAt = event.block.timestamp.toString();
+  proposal.processedAtBlockNumber = event.block.number;
 
   // NOTE: issue processing reward and return deposit
   // TODO: Can this create a member (exists=false) if needed?
