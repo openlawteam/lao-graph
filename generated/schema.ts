@@ -1116,6 +1116,23 @@ export class Proposal extends Entity {
     this.set("processedAt", Value.fromString(value));
   }
 
+  get processedAtBlockNumber(): BigInt | null {
+    let value = this.get("processedAtBlockNumber");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set processedAtBlockNumber(value: BigInt | null) {
+    if (value === null) {
+      this.unset("processedAtBlockNumber");
+    } else {
+      this.set("processedAtBlockNumber", Value.fromBigInt(value as BigInt));
+    }
+  }
+
   get member(): string {
     let value = this.get("member");
     return value.toString();

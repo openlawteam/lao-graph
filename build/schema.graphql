@@ -125,6 +125,7 @@ type Proposal @entity {
   createdAt: String!
   sponsoredAt: String!
   processedAt: String!
+  processedAtBlockNumber: BigInt
   member: Member!
   memberAddress: Bytes!
   delegateKey: Bytes!
