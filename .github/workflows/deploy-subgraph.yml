@@ -20,15 +20,17 @@ jobs:
       # Runs the Super-Linter action
       - name: Run subgraph deployer for LOCALHOST
         uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         # uses: github/super-linter@v3
         # env:
         #   DEFAULT_BRANCH: master
         #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: node -v
+      - run: npm -v
       # - run: npm install -g @graphprotocol/graph-cli
       # - run: graph init --from-example <GITHUB_USER>/<SUBGRAPH NAME> <DIRECTORY>
       - run: npm install
-      - run: npm install @graphprotocol/graph-cli
       # - run: yarn codegen
       - run: graph auth https://api.thegraph.com/deploy/ ${{ secrets.SUBGRAPH_ACCESS_TOKEN }}
       - run: npm run lao_local # prepare subgraph.yaml
