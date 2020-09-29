@@ -28,7 +28,7 @@ jobs:
       # - run: npm install -g @graphprotocol/graph-cli
       # - run: graph init --from-example <GITHUB_USER>/<SUBGRAPH NAME> <DIRECTORY>
       - run: npm install
-      - run: npm install -g @graphprotocol/graph-cli
+      - run: npm install @graphprotocol/graph-cli
       # - run: yarn codegen
       - run: graph auth https://api.thegraph.com/deploy/ ${{ secrets.SUBGRAPH_ACCESS_TOKEN }}
       - run: npm run lao_local # prepare subgraph.yaml
