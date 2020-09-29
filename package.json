@@ -12,11 +12,30 @@
     "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
     "prepare:rinkeby": "mustache config/rinkeby.json subgraph.template.yaml > subgraph.yaml",
     "prepare:kovan": "mustache config/kovan.json subgraph.template.yaml > subgraph.yaml",
-    "prepare:lao2:local": "mustache config/lao2-rinkeby.json subgraph.template.yaml > subgraph.yaml"
+    "prepare:lao2:local": "mustache config/lao2-rinkeby.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:nft:mainnet": "mustache config/nft-mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "hi": "echo $npm_package_config_lao_local_network && echo $npm_package_config_lao_local_address",
+    "prepare:test": "mustache $npm_package_config_lao_local subgraph.template.yaml > subgraph.yaml",
+    "hi2": "echo $npm_package_config_lao_local_network && echo $npm_package_config_lao_local_address",
+    "lao_local": "handlebars --network \"rinkeby\" --address '\"0xac665be1e44cc4eec388e34c3899c271fee847f4\"' < subgraph.template.yaml > outputYES.yaml",
+    "lao_local2": "handlebars --network \"$npm_package_config_lao_local_network\" --address \"$npm_package_config_lao_local_address\" < subgraph.template.yaml > outputNO.yaml"
+  },
+  "config": {
+    "lao_local": {
+      "network": "rinkeby",
+      "address": "0xac665be1e44cc4eec388e34c3899c271fee847f4",
+      "subgraph_name": "sophiacodes/the-lao-localhost"
+    },
+    "lao_dev": {
+      "network": "rinkeby",
+      "address": "0x8276d5E4133ebA2043A2a9FcCC55284C1243f1d4",
+      "subgraph_name": "sophiacodes/the-lao-rinkeby"
+    }
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.18.0",
     "@graphprotocol/graph-ts": "0.18.0",
+    "handlebars-cmd": "^0.1.4",
     "mustache": "^4.0.1"
   }
 }
