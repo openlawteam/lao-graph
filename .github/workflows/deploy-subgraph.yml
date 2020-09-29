@@ -14,11 +14,16 @@ jobs:
 
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
-      - name: Checkout code
-        uses: actions/checkout@v2
+      # - name: Checkout code
+      #   uses: actions/checkout@v2
 
       # Runs the Super-Linter action
       - name: Run subgraph deployer for LOCALHOST
+        uses: actions/checkout@v2
+        # uses: github/super-linter@v3
+        # env:
+        #   DEFAULT_BRANCH: master
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: node -v
       # - run: npm install -g @graphprotocol/graph-cli
       # - run: graph init --from-example <GITHUB_USER>/<SUBGRAPH NAME> <DIRECTORY>

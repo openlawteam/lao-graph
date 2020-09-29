@@ -14,9 +14,6 @@
     "prepare:kovan": "mustache config/kovan.json subgraph.template.yaml > subgraph.yaml",
     "prepare:lao2:local": "mustache config/lao2-rinkeby.json subgraph.template.yaml > subgraph.yaml",
     "prepare:nft:mainnet": "mustache config/nft-mainnet.json subgraph.template.yaml > subgraph.yaml",
-    "hi": "echo $npm_package_config_lao_local_network && echo $npm_package_config_lao_local_address",
-    "prepare:test": "mustache $npm_package_config_lao_local subgraph.template.yaml > subgraph.yaml",
-    "hi2": "echo $npm_package_config_lao_local_network && echo $npm_package_config_lao_local_address",
     "lao_local": "handlebars --network \"rinkeby\" --address '\"0xac665be1e44cc4eec388e34c3899c271fee847f4\"' < subgraph.template.yaml > outputYES.yaml",
     "lao_local2": "handlebars --network \"$npm_package_config_lao_local_network\" --address \"$npm_package_config_lao_local_address\" < subgraph.template.yaml > outputNO.yaml"
   },
