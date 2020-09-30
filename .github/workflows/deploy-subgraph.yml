@@ -3,9 +3,9 @@ name: Subgraph-Deployer
 # Run this workflow every time a new commit pushed to the repository
 on: push
 
-defaults:
-  run:
-    shell: bash
+# defaults:
+#   run:
+#     shell: bash
 
 jobs:
   test:
