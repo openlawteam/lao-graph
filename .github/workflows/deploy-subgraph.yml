@@ -13,13 +13,11 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Checkout and Setup
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
 
-      - name: NPM Install
       - run: npm install -g yarn
 
       - id: yarn-cache
@@ -33,11 +31,8 @@ jobs:
       # - run: which sh # lets check the shell in use
       - run: yarn
       - run: yarn codegen
-
-      - name: Graph Build
       - run: yarn build
       # - run: yarn auth
       # - run: yarn run graph auth https://api.thegraph.com/deploy/ ${{ secrets.SUBGRAPH_ACCESS_TOKEN }}
       # - run: yarn deploy
-      - name: Graph Deploy LOCALHOST
       - run: yarn run graph deploy --access-token ${{ secrets.SUBGRAPH_ACCESS_TOKEN }} --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-localhost
