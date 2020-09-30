@@ -3,6 +3,10 @@ name: Subgraph-Deployer
 # Run this workflow every time a new commit pushed to the repository
 on: push
 
+# defaults:
+#   run:
+#     shell: bash
+
 jobs:
   test:
     strategy:
@@ -28,8 +32,8 @@ jobs:
           key: ${{ matrix.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ matrix.os }}-yarn-
+      - run: which sh # lets check the shell in use
       - run: yarn
-
       - run: yarn codegen
       - run: yarn build
       - run: yarn auth
