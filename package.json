@@ -4,6 +4,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
+    "auth": "graph auth https://api.thegraph.com/deploy/ ${{ secrets.SUBGRAPH_ACCESS_TOKEN }}",
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-localhost",
     "create-local": "graph create --node http://localhost:8020/ sophiacodes/the-lao-localhost",
     "remove-local": "graph remove --node http://localhost:8020/ sophiacodes/the-lao-localhost",

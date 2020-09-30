@@ -32,4 +32,5 @@ jobs:
 
       - run: yarn codegen
       - run: yarn build
+      - run: yarn auth
       - run: yarn deploy
