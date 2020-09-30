@@ -37,5 +37,5 @@ jobs:
       - run: yarn codegen
       - run: yarn build
       # - run: yarn auth
-      - run: yarn run graph auth https://api.thegraph.com/deploy/ ${{ secrets.SUBGRAPH_ACCESS_TOKEN }}
+      # - run: yarn run graph auth https://api.thegraph.com/deploy/ ${{ secrets.SUBGRAPH_ACCESS_TOKEN }}
       - run: yarn deploy
