@@ -4,39 +4,32 @@ name: Subgraph-Deployer
 on: push
 
 jobs:
-  # Set the job key. The key is displayed as the job name
-  # when a job name is not provided
-  lao-localhost:
-    # Name the Job
-    name: LAO Localhost
-    # Set the type of machine to run on
-    runs-on: ubuntu-latest
+  test:
+    strategy:
+      matrix:
+        node: ["10.x", "12.x"]
+        os: [ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
-      # Checks out a copy of your repository on the ubuntu-latest machine
-      # - name: Checkout code
-      #   uses: actions/checkout@v2
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
 
-      # Runs the Super-Linter action
-      - name: Run subgraph deployer for LOCALHOST
-        uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        # uses: github/super-linter@v3
-        # env:
-        #   DEFAULT_BRANCH: master
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: node -v
-      - run: npm -v
-      # - run: npm install -g @graphprotocol/graph-cli
-      # - run: graph init --from-example <GITHUB_USER>/<SUBGRAPH NAME> <DIRECTORY>
-      - run: npm install
-      # - run: yarn codegen
-      - run: graph auth https://api.thegraph.com/deploy/ ${{ secrets.SUBGRAPH_ACCESS_TOKEN }}
-      - run: npm run lao_local # prepare subgraph.yaml
-      - run: graph build
-      - run: graph deploy \
-          --debug \
-          --node https://api.thegraph.com/deploy/ \
-          --ipfs https://api.thegraph.com/ipfs/ \
-          $npm_package_config_lao_local_subgraph_name
+      - run: npm install -g yarn
+
+      - id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ matrix.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ matrix.os }}-yarn-
+      - run: yarn
+
+      - run: yarn codegen
+      - run: yarn build
+      - run: yarn deploy
