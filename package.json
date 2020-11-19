@@ -4,7 +4,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-localhost",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-localhost --access-token=18635eaf24194097b1fe900c07565a74",
     "create-local": "graph create --node http://localhost:8020/ sophiacodes/the-lao-localhost",
     "remove-local": "graph remove --node http://localhost:8020/ sophiacodes/the-lao-localhost",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 sophiacodes/the-lao-localhost",
@@ -12,7 +12,11 @@
     "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
     "prepare:rinkeby": "mustache config/rinkeby.json subgraph.template.yaml > subgraph.yaml",
     "prepare:kovan": "mustache config/kovan.json subgraph.template.yaml > subgraph.yaml",
-    "prepare:lao2:local": "mustache config/lao2-rinkeby.json subgraph.template.yaml > subgraph.yaml"
+    "prepare:lao2:local": "mustache config/lao2-rinkeby.json subgraph.template.yaml > subgraph.yaml",
+    "auth:dev": "graph auth  TODO --node http://graph.dev.thelao.io:8020",
+    "create:dev": "graph create fforbeck/the-lao-localhost --node http://graph.dev.thelao.io:8020",
+    "deploy:dev": "yarn prepare:local && graph deploy fforbeck/the-lao-localhost --node http://graph.dev.thelao.io:8020 --ipfs http://graph.dev.thelao.io:5001",
+    "remove:dev": "graph remove fforbeck/the-lao-localhost --node http://graph.dev.thelao.io:8020"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.18.0",
