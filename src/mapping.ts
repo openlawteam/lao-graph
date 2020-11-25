@@ -811,6 +811,7 @@ export function handleRagequit(event: Ragequit): void {
   // set to doesn't exist if no shares?
   if (member.shares.equals(new BigInt(0))) {
     member.exists = false;
+    member.didRagequit = true;
   }
 
   // for each approved token, calculate the fairshare value and transfer from guildbank to user
