@@ -64,3 +64,6 @@ typings/
 
 # next.js build output
 .next
+
+# Output of batch-deploy.sh temp json file
+temp.json
