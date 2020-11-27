@@ -41,9 +41,8 @@ jq -c '.[]' ./config/subgraph-config.json | while read i; do
 
     # Deploy subgraph <GITHUB_USERNAME/SUBGRAPH_NAME>
     echo "🚗 ### Deploying subgraph..."
-    # GRAPH_DEPLOY=$(graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $GITHUB_USERNAME/$SUBGRAPH_NAME)
-    graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-2
-    # echo $GRAPH_DEPLOY
+    GRAPH_DEPLOY=$(graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $GITHUB_USERNAME/$SUBGRAPH_NAME)
+    echo $GRAPH_DEPLOY
 
     # GRAPH_DEPLOY=$(graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/)
     # echo "$GRAPH_DEPLOY $GITHUB_USERNAME/$SUBGRAPH_NAME
