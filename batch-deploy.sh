@@ -15,7 +15,7 @@ fi
 jq -c '.[]' ./config/subgraph-config.json | while read i; do
 
     # Identify the subgraph template   
-    echo "🛠    - Preparing subgraph template for..."
+    echo "🛠 ### Preparing subgraph template for..."
     address=$(echo $i | jq .address)
     network=$(echo $i | jq .network)
     GITHUB_USERNAME=$(echo $i | jq .GITHUB_USERNAME)
@@ -36,18 +36,21 @@ jq -c '.[]' ./config/subgraph-config.json | while read i; do
     mustache temp.json subgraph.template.yaml > subgraph.yaml
 
     # Build subgraph 
-    echo "📦    - Building subgraph..."
+    echo "📦 ### Building subgraph..."
     graph build
 
     # Deploy subgraph <GITHUB_USERNAME/SUBGRAPH_NAME>
-    echo "🚗    - Deploying subgraph..."
-    GRAPH_DEPLOY=$(graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $GITHUB_USERNAME/$SUBGRAPH_NAME)
-    # graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-2
-    echo $GRAPH_DEPLOY
+    echo "🚗 ### Deploying subgraph..."
+    # GRAPH_DEPLOY=$(graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $GITHUB_USERNAME/$SUBGRAPH_NAME)
+    graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-2
+    # echo $GRAPH_DEPLOY
 
-    echo "👏    - Done.
+    # GRAPH_DEPLOY=$(graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/)
+    # echo "$GRAPH_DEPLOY $GITHUB_USERNAME/$SUBGRAPH_NAME
+
+    echo "👏 ### Done.
     
     "
 done
 
-echo "🎉   Deployment successful!"
+echo "🎉 ### Deployment successful!"

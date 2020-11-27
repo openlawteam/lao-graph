@@ -30,3 +30,5 @@ jobs:
             ${{ matrix.os }}-yarn-
       - run: yarn
       - run: yarn codegen
+      - run: |
+          sh ./batch-deploy.sh
