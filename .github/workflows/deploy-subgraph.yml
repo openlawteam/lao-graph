@@ -31,6 +31,6 @@ jobs:
       - run: yarn
       - run: yarn codegen
       - run: |
-        echo "test"
-        chmod +x ./batch-deploy.sh
-        ./batch-deploy.sh
+        echo $GITHUB_WORKSPACE
+        chmod +x $GITHUB_WORKSPACE/batch-deploy.sh
+        bash $GITHUB_WORKSPACE/batch-deploy.sh

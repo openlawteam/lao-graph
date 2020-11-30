@@ -37,7 +37,7 @@ jq -c '.[]' ./config/subgraph-config.json | while read i; do
 
     # Build subgraph 
     echo "📦 ### Building subgraph..."
-    graph build
+    yarn run graph build
 
     # Deploy subgraph <GITHUB_USERNAME/SUBGRAPH_NAME>
     echo "🚗 ### Deploying subgraph..."
