@@ -18,8 +18,8 @@ jq -c '.[]' ./config/subgraph-config.json | while read i; do
     echo "🛠 ### Preparing subgraph template for..."
     address=$(echo $i | jq .address)
     network=$(echo $i | jq .network)
-    GITHUB_USERNAME=$(echo $i | jq .GITHUB_USERNAME)
-    SUBGRAPH_NAME=$(echo $i | jq .SUBGRAPH_NAME)
+    export GITHUB_USERNAME=$(echo $i | jq .GITHUB_USERNAME)
+    export SUBGRAPH_NAME=$(echo $i | jq .SUBGRAPH_NAME)
 
     # Display JSON template object
     echo "
