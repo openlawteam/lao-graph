@@ -31,5 +31,6 @@ jobs:
       - run: yarn
       - run: yarn codegen
       - run: |
+        echo "test"
         chmod +x ./batch-deploy.sh
-        bash ./batch-deploy.sh
+        ./batch-deploy.sh
