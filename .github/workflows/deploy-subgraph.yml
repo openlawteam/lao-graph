@@ -30,6 +30,8 @@ jobs:
             ${{ matrix.os }}-yarn-
       - run: yarn
       - run: yarn codegen
+      - uses: actions/checkout@v1
       - run: |
-          chmod +x ./batch-deploy.sh
-          ./batch-deploy.sh
+        echo "test"
+        chmod +x ./batch-deploy.sh
+        bash ./batch-deploy.sh
