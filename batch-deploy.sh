@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-set -e
+# set -e
 
-if ! which jq 2>&1 > /dev/null; then
-    echo "Please install 'jq' first"
-    exit 1
-fi
+# if ! which jq 2>&1 > /dev/null; then
+#     echo "Please install 'jq' first"
+#     exit 1
+# fi
 
-if ! which graph 2>&1 > /dev/null; then
-    echo "Please install 'graph-cli' first; npm install -g @graphprotocol/graph-cli"
-    exit 1
-fi
+# if ! which graph 2>&1 > /dev/null; then
+#     echo "Please install 'graph-cli' first; npm install -g @graphprotocol/graph-cli"
+#     exit 1
+# fi
 
 jq -c '.[]' ./config/subgraph-config.json | while read i; do
 
