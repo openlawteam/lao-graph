@@ -32,17 +32,21 @@ jq -c '.[]' ./config/subgraph-config.json | while read i; do
     # Temp save network template data 
     echo $i > temp.json
 
-    # Create subgraph template with json
-    mustache temp.json subgraph.template.yaml > subgraph.yaml
+    # Create subgraph template using temp.json
+    # yarn run mustache temp.json subgraph.template.yaml > subgraph.yaml
+    yarn run build-template
 
     # Build subgraph 
     echo "📦 ### Building subgraph..."
     yarn run graph build
 
+    echo $GITHUB_USERNAME/$SUBGRAPH_NAME
+
     # Deploy subgraph <GITHUB_USERNAME/SUBGRAPH_NAME>
     echo "🚗 ### Deploying subgraph..."
-    GRAPH_DEPLOY='yarn run graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $GITHUB_USERNAME/$SUBGRAPH_NAME'
-    echo $(`$GRAPH_DEPLOY`)
+    GRAPH_DEPLOY="yarn run graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $GITHUB_USERNAME/$SUBGRAPH_NAME"
+    echo $("$GRAPH_DEPLOY")
+    # echo "$GRAPH_DEPLOY"
 
     # GRAPH_DEPLOY=$(graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/)
     # echo "$GRAPH_DEPLOY $GITHUB_USERNAME/$SUBGRAPH_NAME

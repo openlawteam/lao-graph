@@ -8,11 +8,14 @@
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-localhost",
     "create-local": "graph create --node http://localhost:8020/ sophiacodes/the-lao-localhost",
     "remove-local": "graph remove --node http://localhost:8020/ sophiacodes/the-lao-localhost",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 sophiacodes/the-lao-localhost"
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 sophiacodes/the-lao-localhost",
+    "build-template": "mustache temp.json subgraph.template.yaml > subgraph.yaml"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.18.0",
-    "@graphprotocol/graph-ts": "0.18.0",
+    "@graphprotocol/graph-ts": "0.18.0"
+  },
+  "devDependencies": {
     "mustache": "^4.0.1"
   }
 }
