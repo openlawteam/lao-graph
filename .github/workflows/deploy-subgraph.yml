@@ -30,7 +30,7 @@ jobs:
             ${{ matrix.os }}-yarn-
       - run: yarn
       - run: yarn codegen
-      - run: yarn auth
+      - run: bash yarn auth
       - run: |
           echo $GITHUB_WORKSPACE
           chmod +x $GITHUB_WORKSPACE/batch-deploy.sh
