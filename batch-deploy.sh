@@ -16,10 +16,10 @@ jq -c '.[]' ./config/subgraph-config.json | while read i; do
 
     # Identify the subgraph template   
     echo "🛠 ### Preparing subgraph template for..."
-    address=$(echo $i | jq .address)
-    network=$(echo $i | jq .network)
-    export GITHUB_USERNAME=$(echo $i | jq .GITHUB_USERNAME)
-    export SUBGRAPH_NAME=$(echo $i | jq .SUBGRAPH_NAME)
+    address=$(echo $i | jq -r .address)
+    network=$(echo $i | jq -r .network)
+    export GITHUB_USERNAME=$(echo $i | jq -r .GITHUB_USERNAME)
+    export SUBGRAPH_NAME=$(echo $i | jq -r .SUBGRAPH_NAME)
 
     # Display JSON template object
     echo "
@@ -44,9 +44,9 @@ jq -c '.[]' ./config/subgraph-config.json | while read i; do
 
     # Deploy subgraph <GITHUB_USERNAME/SUBGRAPH_NAME>
     echo "🚗 ### Deploying subgraph..."
-    GRAPH_DEPLOY="yarn run graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $GITHUB_USERNAME/$SUBGRAPH_NAME"
-    # echo $("$GRAPH_DEPLOY")
-    echo $GRAPH_DEPLOY
+    GRAPH_DEPLOY="graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ $GITHUB_USERNAME/$SUBGRAPH_NAME"
+    echo $("$GRAPH_DEPLOY")
+    # echo $GRAPH_DEPLOY
 
     # GRAPH_DEPLOY=$(graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/)
     # echo "$GRAPH_DEPLOY $GITHUB_USERNAME/$SUBGRAPH_NAME
