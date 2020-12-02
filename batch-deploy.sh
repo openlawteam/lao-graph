@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# set -e
+set -e
 
 # if ! which jq 2>&1 > /dev/null; then
 #     echo "Please install 'jq' first"
@@ -33,7 +33,7 @@ jq -c '.[]' ./config/subgraph-config.json | while read i; do
     echo $i > temp.json
 
     # Create subgraph template with json
-    yarn run mustache temp.json subgraph.template.yaml > subgraph.yaml
+    mustache temp.json subgraph.template.yaml > subgraph.yaml
 
     # Build subgraph 
     echo "📦 ### Building subgraph..."

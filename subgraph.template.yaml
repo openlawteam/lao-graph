@@ -29,37 +29,28 @@ dataSources:
         - name: Contract
           file: ./abis/Contract.json
       eventHandlers:
-        - event: >-
-            SummonComplete(indexed
-            address,address[],uint256,uint256,uint256,uint256,uint256,uint256,uint256)
+        - event: SummonComplete(indexed address,address[],uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSummonComplete
-        - event: >-
-            SubmitProposal(indexed
-            address,uint256,uint256,uint256,address,uint256,address,string,bool[6],uint256,indexed
-            address,indexed address)
+        - event: SubmitProposal(indexed address,uint256,uint256,uint256,address,uint256,address,string,bool[6],uint256,indexed address,indexed address)
           handler: handleSubmitProposal
-        - event: >-
-            SponsorProposal(indexed address,indexed
-            address,uint256,uint256,uint256)
+        - event: SponsorProposal(indexed address,indexed address,uint256,uint256,uint256)
           handler: handleSponsorProposal
-        - event: >-
-            SubmitVote(uint256,indexed uint256,indexed address,indexed
-            address,uint8)
+        - event: SubmitVote(uint256,indexed uint256,indexed address,indexed address,uint8)
           handler: handleSubmitVote
-        - event: "ProcessProposal(indexed uint256,indexed uint256,bool)"
+        - event: ProcessProposal(indexed uint256,indexed uint256,bool)
           handler: handleProcessProposal
-        - event: "ProcessWhitelistProposal(indexed uint256,indexed uint256,bool)"
+        - event: ProcessWhitelistProposal(indexed uint256,indexed uint256,bool)
           handler: handleProcessWhitelistProposal
-        - event: "ProcessGuildKickProposal(indexed uint256,indexed uint256,bool)"
+        - event: ProcessGuildKickProposal(indexed uint256,indexed uint256,bool)
           handler: handleProcessGuildKickProposal
-        - event: "Ragequit(indexed address,uint256,uint256)"
+        - event: Ragequit(indexed address,uint256,uint256)
           handler: handleRagequit
-        - event: "TokensCollected(indexed address,uint256)"
+        - event: TokensCollected(indexed address,uint256)
           handler: handleTokensCollected
-        - event: "CancelProposal(indexed uint256,address)"
+        - event: CancelProposal(indexed uint256,address)
           handler: handleCancelProposal
-        - event: "UpdateDelegateKey(indexed address,address)"
+        - event: UpdateDelegateKey(indexed address,address)
           handler: handleUpdateDelegateKey
-        - event: "OwnershipTransferred(indexed address,indexed address)"
+        - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
       file: ./src/mapping.ts
