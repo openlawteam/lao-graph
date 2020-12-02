@@ -2,7 +2,7 @@
   "name": "lao-graph",
   "license": "UNLICENSED",
   "scripts": {
-    "auth": "graph auth https://api.thegraph.com/deploy/ ${{ secrets.SUBGRAPH_ACCESS_TOKEN }}",
+    "auth": "graph auth https://api.thegraph.com/deploy/ ${{secrets.SUBGRAPH_ACCESS_TOKEN}}",
     "codegen": "graph codegen",
     "build": "graph build",
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sophiacodes/the-lao-localhost",

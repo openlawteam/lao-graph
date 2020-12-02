@@ -38,11 +38,11 @@ jq -c '.[]' ./config/subgraph-config.json | while read i; do
 
     # Build subgraph 
     echo "📦 ### Building subgraph..."
-    yarn run graph build
+    yarn run build
 
      # Authenticate access  
-    echo "🔑 ### Authenticate..."
-    yarn run auth
+    # echo "🔑 ### Authenticate..."
+    # yarn run auth
 
     echo $GITHUB_USERNAME/$SUBGRAPH_NAME
 
