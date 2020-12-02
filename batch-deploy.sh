@@ -40,6 +40,10 @@ jq -c '.[]' ./config/subgraph-config.json | while read i; do
     echo "📦 ### Building subgraph..."
     yarn run graph build
 
+     # Authenticate access  
+    echo "🔑 ### Authenticate..."
+    yarn run auth
+
     echo $GITHUB_USERNAME/$SUBGRAPH_NAME
 
     # Deploy subgraph <GITHUB_USERNAME/SUBGRAPH_NAME>
