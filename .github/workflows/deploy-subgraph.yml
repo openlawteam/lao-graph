@@ -30,7 +30,7 @@ jobs:
             ${{ matrix.os }}-yarn-
       - run: yarn
       - run: yarn codegen
-      - run: bash yarn auth
+      - run: graph auth https://api.thegraph.com/deploy/ ${{secrets.SUBGRAPH_ACCESS_TOKEN}}
       - run: |
           echo $GITHUB_WORKSPACE
           chmod +x $GITHUB_WORKSPACE/batch-deploy.sh
