@@ -13,10 +13,12 @@
     "prepare:rinkeby": "mustache config/rinkeby.json subgraph.template.yaml > subgraph.yaml",
     "prepare:kovan": "mustache config/kovan.json subgraph.template.yaml > subgraph.yaml",
     "prepare:lao2:local": "mustache config/lao2-rinkeby.json subgraph.template.yaml > subgraph.yaml",
-    "auth:dev": "graph auth  TODO --node http://graph.dev.thelao.io:8020",
-    "create:dev": "graph create fforbeck/the-lao-localhost --node http://graph.dev.thelao.io:8020",
-    "deploy:dev": "yarn prepare:local && graph deploy fforbeck/the-lao-localhost --node http://graph.dev.thelao.io:8020 --ipfs http://graph.dev.thelao.io:5001",
-    "remove:dev": "graph remove fforbeck/the-lao-localhost --node http://graph.dev.thelao.io:8020"
+    "create:dev": "graph create dev/the-lao-localhost --node http://graph-api.dev.thelao.io:8020",
+    "deploy:dev": "yarn prepare:local && graph deploy fforbeck/the-lao-localhost --node http://graph-api.dev.thelao.io:8020 --ipfs http://graph.dev.thelao.io:5001",
+    "remove:dev": "graph remove fforbeck/the-lao-localhost --node http://graph-api.dev.thelao.io:8020",
+    "create:prod": "graph create prod/the-lao --node http://graph-api.thelao.io:8020",
+    "deploy:prod": "yarn prepare:mainnet && graph deploy prod/the-lao --node http://graph-api.thelao.io:8020 --ipfs http://graph.thelao.io:5001",
+    "remove:prod": "graph remove prod/the-lao --node http://graph-api.thelao.io:8020"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.18.0",
