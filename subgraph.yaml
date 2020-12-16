@@ -4,10 +4,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Contract
-    network: "rinkeby"
+    network: "mainnet"
     source:
-      address: "0xac665be1e44cc4eec388e34c3899c271fee847f4"
+      address: "0x8f56682a50becb1df2fb8136954f2062871bc7fc"
       abi: Contract
+      startBlock: 9955236
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4

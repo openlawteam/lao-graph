@@ -1,10 +1,10 @@
-type _Schema_
-  @fulltext(
-    name: "proposalSearch"
-    language: en
-    algorithm: rank
-    include: [{ entity: "Proposal", fields: [{ name: "details" }] }]
-  )
+# type _Schema_
+#   @fulltext(
+#     name: "proposalSearch"
+#     language: en
+#     algorithm: rank
+#     include: [{ entity: "Proposal", fields: [{ name: "details" }] }]
+#   )
 
 type Dao @entity {
   id: ID!
