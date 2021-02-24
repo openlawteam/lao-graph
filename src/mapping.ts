@@ -80,8 +80,9 @@ function subtractFromBalance(
     "********** balance " + member.toHex() + ", tokenBalance: {}, amount: {}",
     [balance.tokenBalance.toString(), amount.toString()]
   );
-  // if (balance.tokenBalance.gt(amount)) {
-  //   balance.tokenBalance = balance.tokenBalance.minus(amount);
+
+  // if (balance.tokenBalance.gt(new BigInt(amount.toI32()))) {
+  balance.tokenBalance = balance.tokenBalance.minus(amount);
   // }
 
   balance.save();
@@ -971,12 +972,12 @@ export function handleWithdraw(event: Withdraw): void {
   ]);
 
   if (event.params.amount.gt(BigInt.fromI32(0))) {
-    subtractFromBalance(
-      molochId,
-      event.params.memberAddress,
-      tokenId,
-      event.params.amount
-    );
+    // subtractFromBalance(
+    //   molochId,
+    //   event.params.memberAddress,
+    //   tokenId,
+    //   event.params.amount
+    // );
   }
 }
 
