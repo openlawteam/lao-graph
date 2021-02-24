@@ -43,6 +43,7 @@ function loadOrCreateTokenBalance(
     return tokenBalance;
   }
 }
+
 function addToBalance(
   molochId: string,
   member: Bytes,
@@ -50,7 +51,9 @@ function addToBalance(
   amount: BigInt
 ): string {
   let tokenBalanceId = token.concat("-member-").concat(member.toHex());
+
   log.info("********** add (or create) to balance " + member.toHex(), []);
+
   let balance: TokenBalance | null = loadOrCreateTokenBalance(
     molochId,
     member,
@@ -60,29 +63,73 @@ function addToBalance(
   balance.save();
   return tokenBalanceId;
 }
+
 function subtractFromBalance(
+  molochId: string,
   member: Bytes,
   token: string,
   amount: BigInt
 ): string {
   let tokenBalanceId = token.concat("-member-").concat(member.toHex());
+
   log.info("********** substract from balance " + member.toHex(), []);
+
+  let balance: TokenBalance | null = TokenBalance.load(tokenBalanceId);
+
+  log.info(
+    "********** balance " + member.toHex() + ", tokenBalance: {}, amount: {}",
+    [balance.tokenBalance.toString(), amount.toString()]
+  );
+  // if (balance.tokenBalance.gt(amount)) {
+  //   balance.tokenBalance = balance.tokenBalance.minus(amount);
+  // }
+
+  balance.save();
+  return tokenBalanceId;
+}
+/*
+function subtractFromBalance(
+  molochId: string,
+  member: Bytes,
+  token: string,
+  amount: BigInt
+): string {
+  let tokenBalanceId = token.concat("-member-").concat(member.toHex());
+
+  log.info("********** substract from balance " + member.toHex(), []);
+
   let balanceUnsafe: TokenBalance | null = TokenBalance.load(tokenBalanceId);
+  let balance =
+    balanceUnsafe == null ? new TokenBalance(tokenBalanceId) : balanceUnsafe;
+
   if (balanceUnsafe == null) {
     log.info(
       "********** error while substracting balance from missing balance " +
         member.toHex(),
       []
     );
+  } else {
+    // checking tokenBalance of the member
+    log.info(
+      "********** updating balance for member: " +
+        member.toHex() +
+        ", tokenBalance: {}, tokenBalanceId: {}",
+      [balance.tokenBalance.toString(), tokenBalanceId]
+    );
+
+    // balance.tokenBalance = balance.tokenBalance.minus(amount);
   }
-  let balance =
-    balanceUnsafe == null ? new TokenBalance(tokenBalanceId) : balanceUnsafe;
-  balance.tokenBalance = balance.tokenBalance.minus(amount);
+
+  // let balance =
+  //   balanceUnsafe == null ? new TokenBalance(tokenBalanceId) : balanceUnsafe;
+  // balance.tokenBalance = balance.tokenBalance.minus(amount);
+
+  balance.moloch = molochId;
 
   balance.save();
   return tokenBalanceId;
 }
-
+*/
 function internalTransfer(
   molochId: string,
   from: Bytes,
@@ -90,7 +137,7 @@ function internalTransfer(
   token: string,
   amount: BigInt
 ): void {
-  subtractFromBalance(from, token, amount);
+  subtractFromBalance(molochId, from, token, amount);
   addToBalance(molochId, to, token, amount);
 }
 
@@ -913,19 +960,25 @@ export function handleUpdateDelegateKey(event: UpdateDelegateKey): void {
 // handler: handleWithdraw
 // NOTE: Used event.transaction.from instead of event.params.memberAddress
 // due to event on MCV where those didn't match and caused subtractFromBalance to fail
-// export function handleWithdraw(event: Withdraw): void {
-//   let molochId = event.address.toHexString();
+export function handleWithdraw(event: Withdraw): void {
+  let molochId = event.address.toHexString();
+  let tokenId = molochId.concat("-token-").concat(event.params.token.toHex());
 
-//   let tokenId = molochId.concat("-token-").concat(event.params.token.toHex());
+  log.info("^^^^ WITHDRAW, moloch: {}, token: {}, amount: {}", [
+    molochId,
+    tokenId,
+    event.params.amount.toString(),
+  ]);
 
-//   if (event.params.amount.gt(BigInt.fromI32(0))) {
-//     subtractFromBalance(
-//       event.params.memberAddress,
-//       tokenId,
-//       event.params.amount
-//     );
-//   }
-// }
+  if (event.params.amount.gt(BigInt.fromI32(0))) {
+    subtractFromBalance(
+      molochId,
+      event.params.memberAddress,
+      tokenId,
+      event.params.amount
+    );
+  }
+}
 
 // event TokensCollected(address indexed token, uint256 amountToCollect);
 // handler: handleTokensCollected

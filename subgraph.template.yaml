@@ -3,12 +3,12 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Contract
+    name: Moloch
     network: "{{network}}"
     source:
       address: "{{address}}"
-      abi: Contract
-      startBlock: 9955236
+      abi: Moloch
+      startBlock: "{{startBlock}}"
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -27,8 +27,8 @@ dataSources:
         - UpdateDelegateKey
         - OwnershipTransferred
       abis:
-        - name: Contract
-          file: ./abis/Contract.json
+        - name: Moloch
+          file: ./build/contracts/Moloch.json
       eventHandlers:
         - event: SummonComplete(indexed address,address[],uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSummonComplete
@@ -54,4 +54,6 @@ dataSources:
           handler: handleUpdateDelegateKey
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
+        - event: Withdraw(indexed address,address,uint256)
+          handler: handleWithdraw
       file: ./src/mapping.ts

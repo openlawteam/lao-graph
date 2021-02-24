@@ -44,7 +44,7 @@ export class Dao extends Entity {
 
   get index(): string | null {
     let value = this.get("index");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -88,7 +88,7 @@ export class Dao extends Entity {
 
   get title(): string | null {
     let value = this.get("title");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -105,7 +105,7 @@ export class Dao extends Entity {
 
   get version(): string | null {
     let value = this.get("version");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -252,7 +252,7 @@ export class Moloch extends Entity {
 
   get members(): Array<string> | null {
     let value = this.get("members");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -269,7 +269,7 @@ export class Moloch extends Entity {
 
   get tokenBalances(): Array<string> | null {
     let value = this.get("tokenBalances");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -286,7 +286,7 @@ export class Moloch extends Entity {
 
   get proposals(): Array<string> | null {
     let value = this.get("proposals");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -303,7 +303,7 @@ export class Moloch extends Entity {
 
   get guildTokenBalance(): Array<string> | null {
     let value = this.get("guildTokenBalance");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -323,7 +323,7 @@ export class Moloch extends Entity {
 
   get escrowTokenBalance(): Array<string> | null {
     let value = this.get("escrowTokenBalance");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -388,7 +388,7 @@ export class Moloch extends Entity {
 
   get proposedToJoin(): Array<string> | null {
     let value = this.get("proposedToJoin");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -405,7 +405,7 @@ export class Moloch extends Entity {
 
   get proposedToWhitelist(): Array<string> | null {
     let value = this.get("proposedToWhitelist");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -425,7 +425,7 @@ export class Moloch extends Entity {
 
   get proposedToKick(): Array<string> | null {
     let value = this.get("proposedToKick");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -442,7 +442,7 @@ export class Moloch extends Entity {
 
   get proposedToFund(): Array<string> | null {
     let value = this.get("proposedToFund");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -459,7 +459,7 @@ export class Moloch extends Entity {
 
   get proposedToTrade(): Array<string> | null {
     let value = this.get("proposedToTrade");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -537,7 +537,7 @@ export class TokenBalance extends Entity {
 
   get member(): string | null {
     let value = this.get("member");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -639,7 +639,7 @@ export class Token extends Entity {
 
   get ticker(): string | null {
     let value = this.get("ticker");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -656,7 +656,7 @@ export class Token extends Entity {
 
   get logo(): string | null {
     let value = this.get("logo");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -673,7 +673,7 @@ export class Token extends Entity {
 
   get details(): string | null {
     let value = this.get("details");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -690,7 +690,7 @@ export class Token extends Entity {
 
   get approved(): string | null {
     let value = this.get("approved");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -810,7 +810,7 @@ export class Member extends Entity {
 
   get highestIndexYesVote(): string | null {
     let value = this.get("highestIndexYesVote");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -845,7 +845,7 @@ export class Member extends Entity {
 
   get votes(): Array<string> | null {
     let value = this.get("votes");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -862,7 +862,7 @@ export class Member extends Entity {
 
   get submissions(): Array<string> | null {
     let value = this.get("submissions");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -879,7 +879,7 @@ export class Member extends Entity {
 
   get tokenBalances(): Array<string> | null {
     let value = this.get("tokenBalances");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -914,7 +914,7 @@ export class Member extends Entity {
 
   get jailed(): string | null {
     let value = this.get("jailed");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -1038,7 +1038,7 @@ export class Proposal extends Entity {
 
   get proposalIndex(): BigInt | null {
     let value = this.get("proposalIndex");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -1118,7 +1118,7 @@ export class Proposal extends Entity {
 
   get processedAtBlockNumber(): BigInt | null {
     let value = this.get("processedAtBlockNumber");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -1351,7 +1351,7 @@ export class Proposal extends Entity {
 
   get details(): string | null {
     let value = this.get("details");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -1377,7 +1377,7 @@ export class Proposal extends Entity {
 
   get votes(): Array<string> | null {
     let value = this.get("votes");
-    if (value === null) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
